@@ -1,0 +1,9 @@
+<form [formGroup]="pokemonForm">
+    <div>
+      <label>
+        Enter Pokemon name:
+        <input formControlName="pokemonName" placeholder="Enter name...">
+      </label>
+    </div>
+    <button type="submit" (click)="getPokemon()">Send</button>
+  </form>
