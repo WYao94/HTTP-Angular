@@ -1,4 +1,6 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardComponent } from './dashboard.component';
 
@@ -8,7 +10,13 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      imports: [
+        ReactiveFormsModule,
+        HttpClientModule
+      ],
+      declarations: [ 
+        DashboardComponent
+       ]
     })
     .compileComponents();
 
@@ -19,5 +27,16 @@ describe('DashboardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should be an empty form initially', () => {
+    const pokemonForm = component.pokemonForm;
+    const pokemonFormValues = {
+      pokemonName: '',
+      pokemonAge: '',
+      pokemonDescription: '',
+      pokemonColor: ''
+    }
+    expect(pokemonForm.value).toEqual(pokemonFormValues);
   });
 });

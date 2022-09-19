@@ -22,13 +22,16 @@ export class DashboardComponent implements OnInit {
 
   pokemonForm = this.fb.group({
     pokemonName: ['',[Validators.required]],
+    pokemonAge: ['',[Validators.required]],
+    pokemonDescription: ['',[Validators.required]],
+    pokemonColor: [''],
   });
 
   ngOnInit(): void {
     // Option 3 with behaviorsubject and subscribing to it
-    // this.subscription = this.pokemonService.getPokemon().subscribe((pokemonDetails) => {
-    //   console.log(pokemonDetails);
-    // })
+    this.subscription = this.pokemonService.getPokemon().subscribe((pokemonDetails) => {
+      console.log(pokemonDetails);
+    })
   }
 
   getPokemon() {
@@ -43,7 +46,6 @@ export class DashboardComponent implements OnInit {
   // Option 2 of doing a HTTP call with Rxjs lastValueFrom
     // let promise = new Promise(() => {
     //   let apiURL = `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`;
-    //   console.log(apiURL)
     //   lastValueFrom(this.http.get(apiURL)).then(
     //       (res: any) => { // Success
     //         console.log(res);
@@ -53,8 +55,20 @@ export class DashboardComponent implements OnInit {
     // return promise;
 
     // 3rd option option with a service that has behaviorsubject
-    // this.pokemonService.fetchPokemon(pokemonName);
+    this.pokemonService.fetchPokemon(pokemonName);
 
   }
 
 }
+
+// this.http.post(apiURL, pokemonCreate,
+//   { ...this.headers, responseType: 'json' }
+// )).then((res) => {
+//   this.cartMessage.next(res);
+// });
+
+// this.http.post(apiURL, pokemonCreate, {this.header, responseType: 'json'})).then(
+  //       (res: any) => { // Success
+  //         console.log(res);
+  //       }
+  //     )
